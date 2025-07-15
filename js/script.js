@@ -147,8 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. Checkout Button - Direct to payment
     const checkoutBtn = document.getElementById('checkout-button');
     if(checkoutBtn) {
-        // No need for additional JS, will use default link behavior
-        // Can add tracking here if needed
+        // No additional JS needed - uses default link behavior
     }
 
     // ======================
@@ -175,60 +174,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', animateOnScroll);
     animateOnScroll();
-
-    // ======================
-    // EXIT INTENT POPUP
-    // ======================
-    let mouseY = 0;
-    document.addEventListener('mouseout', function(e) {
-        if(!e.relatedTarget && e.clientY - mouseY <= 0) {
-            showPopup();
-        }
-    });
-    document.addEventListener('mousemove', function(e) {
-        mouseY = e.clientY;
-    });
-
-    function showPopup() {
-        if(localStorage.getItem('popupShown')) return;
-        const popup = document.createElement('div');
-        popup.className = 'popup-overlay';
-        popup.innerHTML = `
-            <div class="popup-content">
-                <button class="close-popup">&times;</button>
-                <h3>Wait! Get 10% Off Your Order</h3>
-                <p>Enter your email to receive an exclusive discount code</p>
-                <form class="popup-form">
-                    <input type="email" placeholder="Your best email" required>
-                    <button type="submit" class="cta-button">GET MY DISCOUNT</button>
-                </form>
-                <p class="small-text">We respect your privacy. Unsubscribe at any time.</p>
-            </div>
-        `;
-        document.body.appendChild(popup);
-        document.body.style.overflow = 'hidden';
-
-        const closeBtn = popup.querySelector('.close-popup');
-        closeBtn.addEventListener('click', function() {
-            document.body.removeChild(popup);
-            document.body.style.overflow = '';
-            localStorage.setItem('popupShown', 'true');
-        });
-
-        const form = popup.querySelector('.popup-form');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input').value;
-            alert(`Discount code sent to ${email}`);
-            document.body.removeChild(popup);
-            document.body.style.overflow = '';
-            localStorage.setItem('popupShown', 'true');
-        });
-    }
-
-    setTimeout(() => {
-        if(!localStorage.getItem('popupShown')) {
-            showPopup();
-        }
-    }, 30000);
 });
