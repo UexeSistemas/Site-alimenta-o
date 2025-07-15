@@ -34,6 +34,31 @@ body {
   position: relative;
 }
 
+/* ===== Urgency Bar ===== */
+.urgency-bar {
+  background-color: #e63946;
+  color: white !important;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.urgency-bar p {
+  margin: 0;
+  color: inherit !important;
+}
+
+.urgency-bar #countdown,
+.urgency-bar #sales-counter {
+  font-weight: 700;
+  color: inherit !important;
+}
+
 .container {
   width: 90%;
   max-width: 1200px;
@@ -137,19 +162,6 @@ p {
 }
 
 /* ===== Header & Hero ===== */
-.urgency-bar {
-  background-color: var(--primary);
-  color: white;
-  padding: 10px 0;
-  font-size: 14px;
-  text-align: center;
-  font-weight: 500;
-}
-
-.urgency-bar strong {
-  font-weight: 700;
-}
-
 .hero {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
@@ -765,7 +777,7 @@ p {
   transform: rotate(45deg);
 }
 
-/* ===== Final CTA Section ===== */
+/* ===== Final CTA Section - Fixed Version ===== */
 .final-cta {
   padding: 80px 0;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -775,12 +787,16 @@ p {
 
 .final-cta h2 {
   color: white;
+  margin-bottom: 20px;
 }
 
 .cta-subtitle {
   font-size: 1.2rem;
   color: rgba(255,255,255,0.9);
   margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cta-box {
@@ -792,59 +808,115 @@ p {
   box-shadow: var(--shadow-lg);
 }
 
+/* Container de Preços - Corrigido */
 .price-container {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: flex-end;
   gap: 15px;
   margin-bottom: 20px;
 }
 
 .original-price {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: var(--gray);
   text-decoration: line-through;
+  position: relative;
+  top: -5px;
 }
 
 .current-price {
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-weight: 700;
   color: var(--primary);
+  line-height: 1;
 }
 
+.discount-badge {
+  background: var(--accent);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/* Countdown - Versão Melhorada */
 .countdown-box {
-  margin: 30px 0;
+  margin: 30px auto;
+  max-width: 400px;
 }
 
 .countdown-label {
   font-size: 0.9rem;
-  color: var(--gray);
+  color: white;
   margin-bottom: 10px;
+  letter-spacing: 1px;
 }
 
 .countdown-timer {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--primary);
+  gap: 8px;
+  font-family: var(--font-heading);
 }
 
 .countdown-timer span {
-  background: #f5f5f5;
-  padding: 5px 15px;
+  background: rgba(0,0,0,0.2);
+  color: white;
+  padding: 8px 15px;
   border-radius: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  min-width: 60px;
+  display: inline-block;
+  text-align: center;
 }
 
+.countdown-timer span:not(:last-child)::after {
+  content: ":";
+  position: relative;
+  left: 8px;
+  color: white;
+}
+
+/* Botão CTA - Ajustado */
+.cta-box .cta-button {
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto;
+  font-size: 1.1rem;
+}
+
+/* Métodos de Pagamento - Ajustado */
 .payment-methods {
-  margin: 20px 0;
+  margin: 25px 0 15px;
 }
 
 .payment-methods img {
-  max-width: 300px;
+  max-width: 280px;
   margin: 0 auto;
-  opacity: 0.8;
+  opacity: 0.9;
+  height: auto;
+}
+
+/* Garantia - Melhorado */
+.guarantee-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--gray);
+  background: rgba(0,0,0,0.05);
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+
+.guarantee-banner img {
+  width: 28px;
 }
 
 /* ===== Footer ===== */
@@ -962,6 +1034,25 @@ footer {
   .floating-cta {
     display: block;
   }
+
+  /* Final CTA adjustments */
+  .cta-box {
+    padding: 30px 20px;
+  }
+
+  .current-price {
+    font-size: 2.2rem;
+  }
+
+  .original-price {
+    font-size: 1.2rem;
+  }
+
+  .countdown-timer span {
+    font-size: 1.5rem;
+    min-width: 50px;
+    padding: 5px 10px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -986,9 +1077,25 @@ footer {
   
   .original-price {
     font-size: 1.2rem;
+    top: 0;
   }
   
   .current-price {
     font-size: 2rem;
+  }
+
+  /* Final CTA adjustments */
+  .final-cta {
+    padding: 60px 0;
+  }
+
+  .cta-box {
+    padding: 25px 15px;
+  }
+
+  .countdown-timer span {
+    font-size: 1.2rem;
+    min-width: 40px;
+    padding: 3px 8px;
   }
 }
